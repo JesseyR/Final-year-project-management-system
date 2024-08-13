@@ -1,0 +1,86 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('https://www.proprofsproject.com/blog/wp-content/uploads/2024/02/10-Best-Project-Management-Softwares-for-Creative-Teams.png');
+    background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+    
+}
+
+/* Header */
+.header {
+    background-color: black;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+    .header h1 {
+        margin: 0;
+    }
+
+    .header a {
+        color: black;
+        text-decoration: none;
+    }
+
+/* Sidebar */
+.sidebar {
+    background-color: orange;
+    width: 200px;
+    height: 100vh;
+    float: left;
+}
+
+    .sidebar ul {
+        list-style-type: none;
+        padding: 20px;
+    }
+
+        .sidebar ul li {
+            margin-bottom: 10px;
+        }
+
+            .sidebar ul li a {
+                color: #333;
+                text-decoration: none;
+                display: block;
+            }
+
+                .sidebar ul li a:hover {
+                    background-color: #ddd;
+                }
+
+/* Main Content */
+.main-content {
+    float: left;
+    padding: 20px;
+    width: calc(100% - 200px); /* Sidebar width subtracted */
+}
+
+    .main-content h2 {
+        margin-bottom: 20px;
+    }
+.progress {
+            width: 100%;
+            background-color: white;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .progress-bar {
+            width: 0%;
+            height: 30px;
+            background-color: green;
+            text-align: center;
+            line-height: 30px;
+            color: white;
+            border-radius: 5px;
+            transition: width 0.5s ease-in-out;
+        }

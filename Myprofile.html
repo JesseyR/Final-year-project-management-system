@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+    <link href="Myprofile.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>My Profile</h1>
+        <div class="profile">
+            <div class="profile-image">
+                <img src="images/student_m.png" alt="User Profile Picture">
+            </div>
+            <div class="profile-details">
+                <h2>User Name</h2>
+                <p>Email: user@example.com</p>
+                <p>Location: City, Country</p>
+                <p>Joined: January 1, 2023</p>
+                <p>Start of Project:Sep 2024</p>
+                <p>Project Name:Project management system</p>
+            </div>
+        </div>
+        <a href="editmyprofile.html" id="editProfileLink">Edit Profile</a>
+    </div>
+
+    <script>
+        // Function to fetch user data from the server
+        function getUserData() {
+            // Replace this with your actual API endpoint for fetching user data
+            fetch('user_profile_api_endpoint')
+                .then(response => response.json())
+                .then(data => {
+                    // Update profile details with fetched user data
+                    document.querySelector('.profile-details h2').textContent = data.username;
+                    document.querySelector('.profile-details p:nth-of-type(1)').textContent = 'Email: ' + data.email;
+                    document.querySelector('.profile-details p:nth-of-type(2)').textContent = 'Location: ' + data.location;
+                    document.querySelector('.profile-details p:nth-of-type(3)').textContent = 'Joined: ' + data.joined;
+                    document.querySelector('.profile-details p:nth-of-type(4)').textContent = 'Start of Project: ' + data.startOfProject;
+                    document.querySelector('.profile-details p:nth-of-type(5)').textContent = 'Project Name: ' + data.projectName;
+                })
+                .catch(error => console.error('Error fetching user data:', error));
+        }
+
+        // Function to handle profile editing
+        function editProfile(event) {
+            event.preventDefault();
+            // Redirect to the edit profile page
+            window.location.href = 'editmyprofile.html';
+        }
+
+        // Execute functions when the DOM content is fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Call the function to fetch user data
+            getUserData();
+
+            // Add click event listener to the 'Edit Profile' link
+            document.getElementById('editProfileLink').addEventListener('click', editProfile);
+        });
+    </script>
+</body>
+</html>

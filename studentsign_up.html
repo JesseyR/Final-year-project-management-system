@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="studentsign_up.css" rel="stylesheet" />
+    <title>STUDENT SIGN-UP</title>
+</head>
+<body>
+    <form id="student_signup" method="post" action="process_form.php">
+        <div>
+            <h2>Student Registration Form</h2>
+            <hr />
+            <div>
+                <label for="txtFirstName">First Name:</label>
+                <input type="text" id="txtFirstName" required>
+            </div>
+            <div>
+                <label for="txtLastName">Last Name:</label>
+                <input type="text" id="txtLastName" required>
+            </div>
+            <div>
+                <label for="admNo">Admission No:</label>
+                <input type="text" id="admNo" required>
+            </div>
+            <div>
+                <label for="ddlProgram">Program:</label>
+                <select id="ddlProgram" required>
+                    <option value="">Select Program</option>
+                    <option value="CS">Computer Science</option>
+                    <option value="EE">Electrical Engineering</option>
+                </select>
+            </div>
+            <div>
+                <label for="txtProjectTitle">Project Title</label>
+                <input type="text" id="txtProjectTitle" required>
+            </div>
+            <div>
+                <button type="button" onclick="validateForm()">Submit</button>
+            </div>
+        </div>
+    </form>
+    <script>
+        function validateForm() {
+            var firstName = document.getElementById("txtFirstName").value;
+            var lastName = document.getElementById("txtLastName").value;
+            var admissionNo = document.getElementById("admNo").value;
+            var program = document.getElementById("ddlProgram").value;
+            var projectTitle = document.getElementById("txtProjectTitle").value;
+
+            if (firstName.trim() === '' || lastName.trim() === '' || admissionNo.trim() === '' || program === '' || projectTitle.trim() === '') {
+                alert("Please fill out all fields.");
+            } else {
+                // You can submit the form here
+                alert("Form submitted successfully!");
+            }
+             
+        }
+    </script>
+</body>
+</html>

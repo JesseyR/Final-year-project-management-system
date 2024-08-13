@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Dashboard.css">
+    <title>Final Year Project Management System Dashboard</title>
+</head>
+<body>
+    <div class="header">
+        <h1>Project Management Dashboard</h1>
+        <a href="user login.aspx">Logout</a>
+    </div>
+    <div class="sidebar">
+        <ul>
+            <li><a href="Myprofile.html">Profile</a></li>
+            <li><a href="">My project</a></li>
+            <li><a href="Mysupervisor.html">My supervisor</a></li>
+            <li><a href="studentsignup.html">Register for new project</a></li>
+            <li><a href="changeprojecttitle.html">Change project title</a></li>
+        </ul>
+    </div>
+    <div class="main-content">
+        <h2>Welcome to Your Dashboard</h2>
+    </div>
+    <h3>Responsive Progress Bar</h3>
+    <div class="progress">
+        <div class="progress-bar" id="myProgressBar">0%</div>
+    </div>
+
+    <button onclick="increaseProgress()">Increase Progress</button>
+    <button onclick="resetProgress()">Reset Progress</button>
+
+    <script>
+        function increaseProgress() {
+            var progressBar = document.getElementById('myProgressBar');
+            var width = parseInt(progressBar.style.width, 10) || 0;
+            if (width < 100) {
+                progressBar.style.width = (width + 10) + '%';
+                progressBar.innerHTML = (width + 10) + '%';
+            }
+        }
+
+        function resetProgress() {
+            var progressBar = document.getElementById('myProgressBar');
+            progressBar.style.width = '0%';
+            progressBar.innerHTML = '0%';
+        }
+    </script>
+</body>
+</html>

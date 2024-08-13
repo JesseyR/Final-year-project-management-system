@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Admin Dashboard</title>
+    <link href="AdminDashboard.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <h1>Admin Dashboard</h1>
+        <nav>
+            <ul>
+                <li><a href="Admindashboard.html">Home</a></li>
+                <li><a href="#">Users</a></li>
+                <li><a href="#">Projects</a></li>
+                <li><a href="#">Documents</a></li>
+                
+                <!-- Add more navigation items as needed -->
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="overview">
+            <h2>System Overview</h2>
+             <div class="stats-container">
+                <div class="stat">
+                    <h3>Total Users</h3>
+                    <p>100</p>
+                </div>
+                <div class="stat">
+                    <h3>Total Projects</h3>
+                    <p>50</p>
+                </div>
+                <div class="stat">
+                    <h3>Active Meetings</h3>
+                    <p>10</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="recent-activities">
+            <h2>Recent Activities</h2>
+            <ul class="activity-list">
+                <li>
+                    <span class="activity-time">April 10, 2024 - 10:30 AM</span>
+                    <span class="activity-description">User John Doe uploaded a document</span>
+                </li>
+                <li>
+                    <span class="activity-time">April 9, 2024 - 3:45 PM</span>
+                    <span class="activity-description">Project "Web Development" status changed to In Progress</span>
+                </li>
+                <!-- Add more activity items as needed -->
+            </ul>
+        </section>
+
+        <section class="manage-users">
+            <h2>Manage Users</h2>
+            <!-- User search/filter form -->
+            <div class="user-search-form">
+                <input type="text" placeholder="Search users..."/>
+                <button type="submit">Search</button>
+            </div>
+
+            <!-- User list -->
+            <ul class="user-list">
+                <li>
+                    <span class="user-name">John Doe</span>
+                    <span class="user-role">Student</span>
+                    <span class="user-actions">
+                        <button>Edit</button>
+                        <button>Delete</button>
+                    </span>
+                </li>
+                <!-- Add more user items as needed -->
+            </ul>
+        </section>
+
+        <section class="manage-projects">
+            <h2>Manage Projects</h2>
+            <ul class="project-list">
+                <li>
+                    <span class="project-title">Web Development</span>
+                    <span class="project-status in-progress">In Progress</span>
+                    <span class="project-actions">
+                        <button>Edit</button>
+                        <button>Delete</button>
+                    </span>
+                </li>
+                <!-- Add more project items as needed -->
+            </ul>
+        </section>
+
+        <section class="manage-meetings">
+            <h2>Manage Meetings</h2>
+            <!-- Add meeting management functionalities -->
+        </section>
+
+        <section class="manage-documents">
+            <h2>Manage Documents</h2>
+            <!-- Document list -->
+            <ul class="document-list">
+                <li>
+                    <span class="document-name">Project Proposal</span>
+                    <span class="document-actions">
+                        <button>Download</button>
+                        <button>Edit</button>
+                        <button>Delete</button>
+                    </span>
+                </li>
+                <!-- Add more document items as needed -->
+            </ul>
+
+            <!-- Document upload form -->
+            <div class="document-upload-form">
+                <input type="file" id="file" name="file"/>
+                <button type="submit">Upload Document</button>
+            </div>
+        </section>
+        
+        <!-- Add more sections for additional functionalities -->
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Final Year Project Management System</p>
+    </footer>
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all navigation links
+            const navLinks = document.querySelectorAll('nav ul li a');
+
+            // Add click event listeners to each navigation link
+            navLinks.forEach(function(link) {
+                link.addEventListener('click', function(event) {
+                    // Prevent default link behavior
+                    event.preventDefault();
+
+                    // Remove 'active' class from all navigation links
+                    navLinks.forEach(function(link) {
+                        link.classList.remove('active');
+                    });
+
+                    // Add 'active' class to the clicked navigation link
+                    link.classList.add('active');
+
+                    // Get the target section ID from the link's id attribute
+                    const targetSectionId = link.id;
+
+                    // Hide all sections
+                    const sections = document.querySelectorAll('main section');
+                    sections.forEach(function(section) {
+                        section.style.display = 'none';
+                    });
+
+                    // Show the target section
+                    const targetSection = document.getElementById(targetSectionId);
+                    targetSection.style.display = 'block';
+                });
+            });
+
+            // Handle document upload form submission
+            const documentUploadForm = document.querySelector('.document-upload-form');
+            documentUploadForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                // Get the file input element
+                const fileInput = document.getElementById('file');
+
+                // Simulate file upload process (replace with actual implementation)
+                alert('Uploading file: ' + fileInput.files[0].name);
+            });
+        });
+    </script>
+</body>
+</html>

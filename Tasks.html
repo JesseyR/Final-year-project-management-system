@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="Tasks.css" rel="stylesheet">
+    <title>My Tasks</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Tasks</h1>
+        <ul id="taskList">
+            <!-- Tasks will be dynamically added here -->
+        </ul>
+        <div id="taskCompletion">
+            <h2>Task Completion</h2>
+            <p style="margin-left: 320px">Total tasks: <span id="totalTasks">0</span></p>
+            <p style="margin-left: 320px">Completed tasks: <span id="completedTasks">0</span></p>
+            <p style="margin-left: 320px">Percentage completed: <span id="percentageCompleted">0</span>%</p>
+        </div>
+    </div>
+
+    <script>
+        // Fetch tasks from the PHP script
+        fetch('Tasks.php')
+            .then(response => response.json())
+            .then(tasks => {
+                displayTasks(tasks);
+                calculateTaskCompletionStatistics(tasks);
+            });
+
+        // Function to display tasks
+        function displayTasks(tasks) {
+            const taskList = document.getElementById('taskList');
+            taskList.innerHTML = ''; // Clear previous tasks
+
+            tasks.forEach(task => {
+                const li = document.createElement('li');
+                li.textContent = task.description;
+                if (task.completed) {
+                    li.classList.add('task-completed');
+                }
+                taskList.appendChild(li);
+            });
+        }
+
+        // Function to calculate task completion statistics
+        function calculateTaskCompletionStatistics(tasks) {
+            const totalTasks = tasks.length;
+            const completedTasks = tasks.filter(task => task.completed).length;
+            const percentageCompleted = totalTasks > 0 ? ((completedTasks / totalTasks) * 100).toFixed(2) : 0;
+
+            // Display task completion statistics
+            document.getElementById('totalTasks').textContent = totalTasks;
+            document.getElementById('completedTasks').textContent = completedTasks;
+            document.getElementById('percentageCompleted').textContent = percentageCompleted;
+        }
+    </script>
+</body>
+</html>

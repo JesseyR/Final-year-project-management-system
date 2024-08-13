@@ -1,0 +1,119 @@
+ <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link href="Style1.css" rel="stylesheet" />
+    <title>ADMIN LOGIN PAGE</title>
+</head>
+<body style="height: 100px">
+    <?php
+    session_start();
+    $error = '';
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Database connection parameters
+        $servername = "localhost";
+        $username = "root";
+        $password = "root";
+        $dbname = "projectdb";
+
+        // Create connection
+        $conn = new mysqli($servername, $username, $password, $dbname);
+
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        // Retrieve and sanitize input data
+        $adminUsername = $conn->real_escape_string($_POST['username']);
+        $adminPassword = $_POST['password']; // Not sanitized since we won't include it directly in SQL
+
+        // Check credentials against the database
+        $sql = "SELECT * FROM admins WHERE username = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $adminUsername);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            if (password_verify($adminPassword, $row['password'])) {
+                // Successful login
+                $_SESSION['admin_logged_in'] = true;
+                header("Location: Admindashboard.html"); // Redirect to admin dashboard
+                exit();
+            } else {
+                // Invalid password
+                $error = 'Invalid username or password';
+            }
+        } else {
+            // Invalid username
+            $error = 'Invalid username or password';
+        }
+
+        // Close statement and connection
+        $stmt->close();
+        $conn->close();
+    }
+    ?>
+
+    <form id="admin_login" method="POST" action="">
+        <section>
+            <img src="images/adminuser.png" />
+        </section>
+        <div class="sec2">
+            <img id="Image1" />
+
+            <div class="container">
+                <div class="content">
+                    <h2> Administrator login</h2>
+
+                    <input type="text" id="TextBox1" name="username" placeholder="Username" />
+                    <span id="RequiredFieldValidator1" style="color: red; display: none;">Invalid username</span>
+                    <br />
+                    <input type="password" id="TextBox2" name="password" placeholder="Password" />
+                    <span id="RequiredFieldValidator2" style="color: red; display: none;">Wrong password!</span>
+                    <br />
+                    <button type="submit" id="Submit">Submit</button>
+                    <?php
+                    if ($error) {
+                        echo '<p style="color:red;">' . $error . '</p>';
+                    }
+                    ?>
+                </div>
+            </div>
+        </div>
+    </form>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get form and form elements
+            const form = document.getElementById('admin_login');
+            const usernameInput = document.getElementById('TextBox1');
+            const passwordInput = document.getElementById('TextBox2');
+
+            // Add event listener to form submit
+            form.addEventListener('submit', function(event) {
+                // Perform client-side form validation
+                let valid = true;
+                if (usernameInput.value.trim() === '') {
+                    valid = false;
+                    document.getElementById('RequiredFieldValidator1').style.display = 'inline';
+                } else {
+                    document.getElementById('RequiredFieldValidator1').style.display = 'none';
+                }
+                if (passwordInput.value.trim() === '') {
+                    valid = false;
+                    document.getElementById('RequiredFieldValidator2').style.display = 'inline';
+                } else {
+                    document.getElementById('RequiredFieldValidator2').style.display = 'none';
+                }
+
+                // If form is not valid, prevent submission
+                if (!valid) {
+                    event.preventDefault();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

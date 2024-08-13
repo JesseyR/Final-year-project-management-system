@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Supervisor</title>
+    <link href="Mysupervisor.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="supervisor-info">
+            <h2>Supervisor Information</h2>
+            <p>
+                <img id="Image1" src="https://cdn-icons-png.freepik.com/512/4205/4205906.png" alt="Supervisor Image" height="139" width="150">
+            </p>
+            <p><strong>Name:</strong> John Doe</p>
+            <p><strong>Email:</strong> john.doe@example.com</p>
+            <p><strong>Phone:</strong> +1234567890</p>
+            <p><strong>Office Location:</strong> Room 101, Building A</p>
+        </div>
+
+        <div class="meeting-schedule">
+            <h2>Meeting Schedule</h2>
+            <ul>
+                <li><strong>Date:</strong> 2024-04-20, <strong>Time:</strong> 10:00 AM, <strong>Agenda:</strong> Discuss project milestones</li>
+                <li><strong>Date:</strong> 2024-04-25, <strong>Time:</strong> 2:00 PM, <strong>Agenda:</strong> Review progress reports</li>
+            </ul>
+            <button id="scheduleMeetingBtn">Schedule New Meeting</button>
+            <div id="scheduleMeetingModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2>Schedule New Meeting</h2>
+                    <label for="meetingDate">Meeting Date:</label>
+                    <input type="date" id="meetingDate">
+                    <br>
+                    <label for="meetingTime">Meeting Time:</label>
+                    <input type="time" id="meetingTime">
+                    <br>
+                    <label for="meetingAgenda">Meeting Agenda:</label>
+                    <textarea id="meetingAgenda"></textarea>
+                    <br>
+                    <button id="scheduleBtn">Schedule</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="document-sharing">
+            <h2>Document Sharing</h2>
+            <input type="file" id="fileInput">
+            <button id="uploadBtn">Upload</button>
+            <div id="documentList">
+                <!-- Uploaded documents will be displayed here -->
+            </div>
+        </div>
+
+        <div class="communication-channels">
+            <h2>Communication Channels</h2>
+            <div class="email">
+                <h3>Email</h3>
+                <p>Contact your supervisor via email:</p>
+                <a href="mailto:supervisor@example.com">supervisor@example.com</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('scheduleMeetingBtn').addEventListener('click', function () {
+            document.getElementById('scheduleMeetingModal').style.display = 'block';
+        });
+
+        document.querySelector('.close').addEventListener('click', function () {
+            document.getElementById('scheduleMeetingModal').style.display = 'none';
+        });
+
+        document.getElementById('scheduleBtn').addEventListener('click', function () {
+            var meetingDate = document.getElementById('meetingDate').value;
+            var meetingTime = document.getElementById('meetingTime').value;
+            var meetingAgenda = document.getElementById('meetingAgenda').value;
+
+            var meetingDetails = "Date: " + meetingDate + "\nTime: " + meetingTime + "\nAgenda: " + meetingAgenda;
+            alert("Meeting Scheduled!\n\n" + meetingDetails);
+
+            document.getElementById('scheduleMeetingModal').style.display = 'none';
+        });
+
+        document.getElementById('uploadBtn').addEventListener('click', function () {
+            var fileInput = document.getElementById('fileInput');
+            var files = fileInput.files;
+            if (files.length > 0) {
+                var formData = new FormData();
+                formData.append('file', files[0]);
+
+                // Simulate file upload process (replace with actual implementation)
+                alert('Uploading file: ' + files[0].name);
+            } else {
+                alert('Please select a file to upload.');
+            }
+        });
+
+        // Function to update the document list
+        function updateDocumentList() {
+            // Clear existing document list
+            var documentList = document.getElementById('documentList');
+            documentList.innerHTML = '';
+
+            // Simulate fetching document list from server
+            var documents = [
+                { name: 'Document 1', url: 'document1.pdf' },
+                { name: 'Document 2', url: 'document2.pdf' }
+            ];
+
+            // Populate document list with fetched data
+            documents.forEach(function (document) {
+                var link = document.createElement('a');
+                link.href = document.url;
+                link.textContent = document.name;
+                link.setAttribute('download', '');
+                var listItem = document.createElement('div');
+                listItem.appendChild(link);
+                documentList.appendChild(listItem);
+            });
+        }
+
+        // Call updateDocumentList() when the page loads to populate the document list
+        window.addEventListener('load', updateDocumentList);
+    </script>
+</body>
+</html>

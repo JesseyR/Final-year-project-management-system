@@ -1,0 +1,90 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color:Orange;
+}
+
+h2 {
+    margin-bottom: 10px;
+    text-decoration: underline;
+}
+
+.supervisor-info p {
+    margin-bottom: 5px;
+}
+
+.meeting-schedule ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+    .meeting-schedule ul li {
+        margin-bottom: 5px;
+    }
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+
+button {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+    button:hover {
+        background-color: #45a049;
+    }
+.project-progress,
+.document-sharing,
+.communication-channels,
+.feedback-evaluation {
+    margin-top: 20px;
+}
+
+    .project-progress h2,
+    .document-sharing h2,
+    .communication-channels h2,
+    .feedback-evaluation h2 {
+        margin-bottom: 10px;
+        font-size: 1.5em;
+        color: #333;
+    }
+
+/* Add more CSS styling as needed */
+
+

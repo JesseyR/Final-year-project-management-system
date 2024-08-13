@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Project Title</title>
+    <link rel="stylesheet" href="changeprojecttitle.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Change Project Title</h1>
+        <div class="form-group">
+            <label for="newTitle">New Project Title:</label>
+            <input type="text" id="newTitle" placeholder="Enter new project title">
+        </div>
+        <button id="changeTitleBtn">Change Title</button>
+        <div id="message"></div>
+    </div>
+
+    <script>
+        document.getElementById('changeTitleBtn').addEventListener('click', function () {
+            var newTitle = document.getElementById('newTitle').value;
+            if (newTitle.trim() !== '') {
+                // Prepare data to send to the server
+                var data = {
+                    newTitle: newTitle
+                };
+
+               var xhr = new XMLHttpRequest();
+                xhr.open('POST', 'update_project_title.php', true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        document.getElementById('message').textContent = xhr.responseText;
+                    } else {
+                        document.getElementById('message').textContent = 'Error occurred: ' + xhr.statusText;
+                    }
+                };
+                xhr.send(JSON.stringify(data));
+            } else {
+                document.getElementById('message').textContent = 'Please enter a new project title.';
+            }
+                setTimeout(function () {
+                    document.getElementById('message').textContent = 'Project title changed successfully to: ' + newTitle;
+                }, 1000); // Simulate 1 second delay for the request
+            } else {
+                document.getElementById('message').textContent = 'Please enter a new project title.';
+            }
+            window.location.replace("Myprofile.html");
+        });
+    </script>
+</body>
+</html>
